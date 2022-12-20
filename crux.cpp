@@ -95,6 +95,7 @@ int main() {
 			char* b = readline("Set 2 Name: ");
 			
 		}*/
+		/*
 		if(strcmp(in, disjointCommand) == 0) {
 			char* a = readline("Set 1 Name: ");
 			char* b = readline("Set 2 Name: ");
@@ -111,6 +112,18 @@ int main() {
 			add_history(b);
 			free(a);
 			free(b);
+		}*/
+		if(strcmp(in, disjointCommand) == 0) {
+    			char* a = readline("Set 1 Name: ");
+    			char* b = readline("Set 2 Name: ");
+    			set intersection;
+    			set_intersection(sets.at(a).values.begin(), sets.at(a).values.end(), sets.at(b).values.begin(), sets.at(b).values.end(), back_inserter(intersection.values));
+    			bool out = intersection.values.empty();
+    			println(out);
+    			add_history(a);
+    			add_history(b);
+    			free(a);
+    			free(b);
 		}
 		if(strcmp(in, unionCommand) == 0) {
 			char* a = readline("Set 1 Name: ");
