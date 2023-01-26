@@ -31,6 +31,12 @@ int main() {
 	char* unionCommand = "union";
 	char* intersectionCommand = "intersection";
 	char* disjointCommand = "disjoint";
+	char* delCommand = "del";
+	char* sortCommand = "sort";
+	char* subsetCommand = "subset";
+	char* minCommand = "min";
+	char* maxCommand = "max";
+	char* containsCommand = "contains";
 	while(true) {
 		in = readline(">>> ");
 		add_history(in);
@@ -90,29 +96,6 @@ int main() {
 			free(a);
 			free(b);
 		}
-		/*if(strcmp(in, multCommand) == 0) {
-			char* a = readline("Set 1 Name: ");
-			char* b = readline("Set 2 Name: ");
-			
-		}*/
-		/*
-		if(strcmp(in, disjointCommand) == 0) {
-			char* a = readline("Set 1 Name: ");
-			char* b = readline("Set 2 Name: ");
-			bool out = true;
-			for(int i = 0; i < sets.at(a).cardinality; i++) {
-				for(int j = 0; j < sets.at(b).cardinality; j++) {
-					if(sets.at(a).values[i] == sets.at(b).values[j]) {
-						out = false;
-					}
-				}
-			}
-			println(out);
-			add_history(a);
-			add_history(b);
-			free(a);
-			free(b);
-		}*/
 		if(strcmp(in, disjointCommand) == 0) {
     			char* a = readline("Set 1 Name: ");
     			char* b = readline("Set 2 Name: ");
@@ -156,6 +139,45 @@ int main() {
 			add_history(b);
 			free(a);
 			free(b);
+		}
+		if(strcmp(in, delCommand) == 1) {
+			char* name = readline("Set Name: ");
+			sets.erase(sets.at(name));
+			add_history(name);
+			free(name);
+		}
+		if(strcmp(in, sortCommand) == 1) {
+			char* a = readline("Set Name: ");
+			set c = sets.at(a);
+			sort(c.values.begin(), c.values.end());
+			for(int i = 0; i < c.values.size(); i++) {
+				print(c.values[i]);
+				print(" ");
+			}
+			println("");
+			add_history(a);
+			free(a);
+		}
+		if(strcmp(in, subsetCommand) == 1) {
+			char* a = readline("Set Name: ");
+			char* b = readline("Subset Name: ");
+			println(includes(sets.at(a).values.begin(), sets.at(a).values.end(), sets.at(b).values.begin(), sets.at(b).values.end()));
+			add_history(a);
+			add_history(b);
+			free(a);
+			free(b);
+		}
+		if(strcmp(in, minCommand) == 1) {
+			char* a = readline("Set Name: ");
+			println(*min_element(sets.at(a).values.begin(), sets.at(a).values.end()));
+			add_history(a);
+			free(a);
+		}
+		if(strcmp(in, maxCommand) == 1) {
+			char* a = readline("Set Name: ");
+			println(*max_element(sets.at(a).values.begin(), sets.at(a).values.end()));
+			add_history(a);
+			free(a);
 		}
 		free(in);
 
